@@ -1,0 +1,402 @@
+@import "tailwindcss";
+
+* {
+  @apply transition-colors duration-300;
+}
+
+/* Ensure animations are not affected by transitions */
+[class*="rain-fall"],
+[class*="snow-cinematic"],
+[class*="star-twinkle"] {
+  transition: none !important;
+}
+
+/* Subtle pulse animation for timer text */
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Ring glow effect */
+@keyframes ring-glow {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(59, 130, 246, 0.6))
+      drop-shadow(0 0 8px rgba(34, 197, 94, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+  }
+}
+.animate-ring-glow {
+  animation: ring-glow 3s ease-in-out infinite;
+}
+
+/* Smooth rain effect */
+@keyframes rain-soft {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+.animate-rain-soft {
+  animation: rain-soft 2.5s linear infinite;
+}
+
+/* Smooth snow effect */
+@keyframes snow-soft {
+  0% {
+    transform: translateY(-50px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px);
+    opacity: 0;
+  }
+}
+.animate-snow-soft {
+  animation: snow-soft 8s linear infinite;
+}
+
+/* Subtle twinkling stars */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+/* CINEMATIC EFFECTS - Premium animations for visibility */
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px)) translateX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes rain-fall-slow {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px)) translateX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes rain-fall-fast {
+  0% {
+    transform: translateY(-100px) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.7;
+  }
+  95% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(calc(100vh + 100px)) translateX(0);
+    opacity: 0;
+  }
+}
+
+/* Cinematic snow with drift and fade */
+@keyframes snow-cinematic {
+  0% {
+    transform: translateY(-50px) translateX(-20px);
+    opacity: 0;
+  }
+  8% {
+    transform: translateY(0px) translateX(-15px);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translateY(50vh) translateX(15px);
+    opacity: 0.85;
+  }
+  92% {
+    transform: translateY(95vh) translateX(25px);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(100vh) translateX(30px);
+    opacity: 0;
+  }
+}
+
+/* Soft star twinkle - slow, subtle fade not blink */
+@keyframes star-twinkle-soft {
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: blur(0.6px) drop-shadow(0 0 8px rgba(191, 219, 254, 0.3));
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(0.5px) drop-shadow(0 0 12px rgba(191, 219, 254, 0.5));
+  }
+}
+
+/* Cinematic star twinkle - soft glow pulse, natural fade */
+@keyframes star-twinkle-cinematic {
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: blur(0.5px) drop-shadow(0 0 10px rgba(191, 219, 254, 0.4));
+  }
+  25% {
+    opacity: 0.85;
+    filter: blur(0.4px) drop-shadow(0 0 14px rgba(191, 219, 254, 0.6));
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(0.5px) drop-shadow(0 0 12px rgba(191, 219, 254, 0.5));
+  }
+  75% {
+    opacity: 0.8;
+    filter: blur(0.4px) drop-shadow(0 0 14px rgba(191, 219, 254, 0.6));
+  }
+}
+
+/* Fade in scale animation */
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-fade-in {
+  animation: fade-in-scale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Radial gradient utility */
+.bg-radial-center {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure fullscreen layout */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* PREMIUM ANIMATIONS - ENHANCED */
+
+/* Module glow effect - for premium buttons */
+@keyframes module-glow {
+  0% {
+    box-shadow:
+      0 0 10px rgba(255, 255, 255, 0.1),
+      inset 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(255, 255, 255, 0.2),
+      inset 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    box-shadow:
+      0 0 10px rgba(255, 255, 255, 0.1),
+      inset 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+}
+.animate-module-glow {
+  animation: module-glow 4s ease-in-out infinite;
+}
+
+/* Smooth button hover lift */
+@keyframes button-lift {
+  0%,
+  100% {
+    transform: translateY(0px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+.hover\:animate-lift:hover {
+  animation: button-lift 0.3s ease-out;
+}
+
+/* Premium float animation */
+@keyframes float-subtle {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+.animate-float {
+  animation: float-subtle 6s ease-in-out infinite;
+}
+
+/* Enhanced text glow for quotes */
+@keyframes text-glow-pulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 20px rgba(59, 130, 246, 0.2),
+      0 0 40px rgba(34, 197, 94, 0.1);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(59, 130, 246, 0.3),
+      0 0 60px rgba(34, 197, 94, 0.15);
+  }
+}
+.animate-text-glow {
+  animation: text-glow-pulse 4s ease-in-out infinite;
+}
+
+/* Shimmer effect for premium elements */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.15)
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Soft fade for modal backdrops */
+@keyframes backdrop-fade {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+.animate-backdrop-enter {
+  animation: backdrop-fade 0.3s ease-out;
+}
+
+/* Enhanced backdrop blur */
+.backdrop-blur-xs {
+  backdrop-filter: blur(1px);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(20px);
+}
+
+/* Elevated shadow */
+.shadow-elevated {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+/* Focus ring for premium inputs */
+.focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.1),
+    0 0 0 4px rgba(59, 130, 246, 0.5);
+  transition: all 0.2s ease-out;
+}
+
+/* Premium transition */
+.transition-premium {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
