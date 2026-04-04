@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+:root {
+	--stone: #2b2b2b;
+	--grass: #5da34d;
+	--dirt: #8b5a2b;
+	--gold: #f5c542;
+	--redstone: #b02e26;
+	--panel: #1f1f1f;
+	--panel-light: #3a3a3a;
+}
+
+body {
+	font-family: "Press Start 2P", "Segoe UI", sans-serif;
+	letter-spacing: 0.05em;
+}
+
+.minecraft-root {
+	background: var(--stone);
+	color: #f8f3e7;
+	overflow: hidden;
+}
+
+.minecraft-root[data-dragging="true"] {
+	cursor: grabbing;
+}
+
+.minecraft-root[data-biome="forest"] {
+	--stone: #2a2c24;
+	--grass: #3d7c3a;
+	--dirt: #6b4b2a;
+	--panel: #1a1c18;
+	--panel-light: #2f3529;
+}
+
+.minecraft-root[data-biome="night"] {
+	--stone: #141622;
+	--grass: #3f6c78;
+	--dirt: #3f2d2b;
+	--panel: #0f1017;
+	--panel-light: #232634;
+}
+
+.minecraft-root[data-biome="nether"] {
+	--stone: #240b0b;
+	--grass: #7a1a12;
+	--dirt: #5c1b16;
+	--panel: #1a0505;
+	--panel-light: #3b0d0d;
+}
+
+.minecraft-texture {
+	position: absolute;
+	inset: 0;
+	background-color: var(--stone);
+	background-image:
+		linear-gradient(90deg, rgba(0, 0, 0, 0.45) 1px, transparent 1px),
+		linear-gradient(rgba(0, 0, 0, 0.45) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+		linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+		linear-gradient(45deg, rgba(93, 163, 77, 0.18) 25%, transparent 25%),
+		linear-gradient(-45deg, rgba(139, 90, 43, 0.18) 25%, transparent 25%);
+	background-size: 12px 12px, 12px 12px, 48px 48px, 48px 48px, 32px 32px, 32px 32px;
+	opacity: 0.85;
+	animation: texture-scroll 18s linear infinite;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.minecraft-particles {
+	position: absolute;
+	inset: 0;
+	background-image:
+		radial-gradient(rgba(245, 197, 66, 0.18) 1px, transparent 2px),
+		radial-gradient(rgba(176, 46, 38, 0.14) 1px, transparent 2px);
+	background-size: 120px 120px, 160px 160px;
+	background-position: 0 0, 60px 60px;
+	opacity: 0.2;
+	animation: particles-float 12s linear infinite;
+	pointer-events: none;
+	z-index: 1;
+}
+
+.panel-frame {
+	background: var(--panel);
+	border: 5px solid var(--panel-light);
+	box-shadow:
+		0 0 0 2px #000,
+		7px 7px 0 #000,
+		inset 2px 2px 0 #3b3b3b,
+		inset -2px -2px 0 #111;
+}
+
+.minecraft-header {
+	background: linear-gradient(135deg, #3e3e3e, #1a1a1a);
+}
+
+.minecraft-button {
+	background: linear-gradient(180deg, #5c5c5c, #2b2b2b);
+	border: 4px solid #111;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 4px 0 #000,
+		inset 2px 2px 0 #6b6b6b,
+		inset -2px -2px 0 #1b1b1b;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	transition: transform 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+}
+
+.minecraft-button:hover {
+	color: #f8f3e7;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 4px 0 #000,
+		inset 2px 2px 0 #7a7a7a,
+		inset -2px -2px 0 #242424;
+}
+
+.minecraft-button:active {
+	transform: translate(2px, 2px) scale(0.96);
+	box-shadow:
+		0 0 0 2px #000,
+		2px 2px 0 #000,
+		inset -2px -2px 0 #0f0f0f;
+}
+
+.minecraft-button-active {
+	color: #f8f3e7;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 4px 0 #000,
+		inset 2px 2px 0 #7a7a7a,
+		inset -2px -2px 0 #242424;
+}
+
+.minecraft-input {
+	background: linear-gradient(180deg, #3a3a3a, #1b1b1b);
+}
+
+.minecraft-input-field {
+	background: #151515;
+	border: 4px solid #0f0f0f;
+	color: #f8f3e7;
+	box-shadow: inset 2px 2px 0 #232323, inset -2px -2px 0 #0b0b0b;
+	letter-spacing: 0.12em;
+}
+
+.minecraft-input-field:focus {
+	outline: none;
+	border-color: #2a2a2a;
+	box-shadow: inset 2px 2px 0 #2f2f2f, inset -2px -2px 0 #111;
+}
+
+.minecraft-cursor {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	width: 8px;
+	height: 20px;
+	background: var(--gold);
+	transform: translateY(-50%);
+	opacity: 0;
+	animation: cursor-blink 1.1s steps(2, jump-none) infinite;
+	pointer-events: none;
+}
+
+.minecraft-input-field:focus + .minecraft-cursor {
+	opacity: 1;
+}
+
+.minecraft-column {
+	background: linear-gradient(180deg, #3a3a3a, #1b1b1b);
+	min-height: 420px;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.minecraft-column::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12));
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	pointer-events: none;
+}
+
+.minecraft-column:hover {
+	box-shadow:
+		0 0 0 2px #000,
+		8px 8px 0 #000,
+		inset 2px 2px 0 #484848,
+		inset -2px -2px 0 #141414;
+}
+
+.minecraft-column:hover::after {
+	opacity: 1;
+}
+
+.minecraft-column h2 {
+	display: inline-block;
+	padding: 6px 10px;
+	background: #1b1b1b;
+	border: 4px solid #0f0f0f;
+	box-shadow:
+		0 0 0 2px #000,
+		inset 2px 2px 0 #2d2d2d,
+		inset -2px -2px 0 #0d0d0d;
+}
+
+.minecraft-slot-count {
+	border: 3px solid #111;
+	padding: 4px 6px;
+	background: #101010;
+	color: var(--gold);
+	box-shadow: 0 0 0 2px #000;
+	font-size: 10px;
+}
+
+.minecraft-task {
+	background: linear-gradient(180deg, #3b3b3b, #1a1a1a);
+	border: 4px solid #0f0f0f;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 4px 0 #000,
+		inset 2px 2px 0 #4a4a4a,
+		inset -2px -2px 0 #0d0d0d;
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+	position: relative;
+	overflow: hidden;
+	will-change: transform;
+}
+
+.minecraft-task:hover {
+	transform: scale(1.02);
+	background: linear-gradient(180deg, #4b4b4b, #232323);
+	border-color: #3d3d3d;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 4px 0 #000;
+}
+
+.minecraft-task-dragging {
+	transform: translateY(-3px) scale(1.01);
+	box-shadow:
+		0 0 0 2px #000,
+		6px 8px 0 #000,
+		10px 10px 0 rgba(0, 0, 0, 0.35);
+}
+
+.minecraft-task-target {
+	transform: translateY(4px);
+	border-color: #3d3d3d;
+	box-shadow:
+		0 0 0 2px #000,
+		4px 8px 0 #000,
+		inset 2px 2px 0 #4a4a4a,
+		inset -2px -2px 0 #0d0d0d;
+}
+
+.minecraft-task-drop {
+	animation: drop-flash 0.14s ease;
+}
+
+.minecraft-task-slot {
+	display: contents;
+}
+
+.minecraft-insert-line {
+	height: 6px;
+	background: #b9c7de;
+}
+
+.minecraft-task-text {
+	line-height: 1.6;
+	font-size: 12px;
+}
+
+.minecraft-delete {
+	color: var(--redstone);
+	border: 2px solid #111;
+	padding: 2px 6px;
+	box-shadow: 0 0 0 2px #000;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+}
+
+.minecraft-delete:hover {
+	transform: scale(1.02);
+	box-shadow: 0 0 0 2px #000, inset 0 0 0 2px #4c4c4c;
+}
+
+.minecraft-delete-icon {
+	width: 16px;
+	height: 16px;
+	fill: currentColor;
+}
+
+@keyframes texture-scroll {
+	from {
+		background-position: 0 0, 0 0, 0 0, 0 0;
+	}
+	to {
+		background-position: 120px 80px, -120px -80px, 60px 120px, -60px -120px;
+	}
+}
+
+@keyframes drop-flash {
+	0% {
+		box-shadow:
+			0 0 0 2px #000,
+			6px 6px 0 #000,
+			inset 0 0 0 2px #8fa0b8;
+	}
+	100% {
+		box-shadow:
+			0 0 0 2px #000,
+			4px 4px 0 #000,
+			inset 0 0 0 0 transparent;
+	}
+}
+
+@keyframes particles-float {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-40px);
+	}
+}
+
+@keyframes cursor-blink {
+	0%,
+	49% {
+		opacity: 1;
+	}
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+
