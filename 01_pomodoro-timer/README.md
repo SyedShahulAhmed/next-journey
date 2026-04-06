@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍅 Pomodoro Timer
 
-## Getting Started
+A **cinematic Pomodoro timer** with immersive focus cycles, ambient atmosphere effects, and a polished UI.
+Built using **Next.js (App Router)** ⚡ + **Tailwind CSS** 🎨
 
-First, run the development server:
+---
+
+## ✨ Features
+
+⏱️ **Smart Timer Modes**
+
+* 🍅 Focus mode
+* ☕ Short break
+* 🌙 Long break (auto-triggered)
+
+🔁 **Automation & Flow**
+
+* Automatic switching between sessions
+* Session counter with long-break intervals
+
+🎮 **Controls**
+
+* ▶️ Start / ⏸ Pause / 🔄 Reset
+* ⌛ Custom time adjustments
+
+⚙️ **Settings Panel**
+
+* Modify focus & break durations
+* Adjust long-break interval
+
+🌌 **Ambient Experience**
+
+* 🌧 Rain effect
+* ❄️ Snow effect
+* ✨ Starfield
+* 🎥 Optional animated backgrounds
+
+💡 **Motivation System**
+* Rotating inspirational quotes while timer runs
+
+🕒 **Clock Options**
+
+* 12h / 24h format toggle
+
+💾 **Persistence**
+
+* Saves:
+
+  * Timer state
+  * Mode
+  * Settings
+  * Background
+* Uses localStorage for seamless experience
+
+---
+
+## 🚀 Getting Started
+
+### 📦 Install dependencies
+
+```bash
+npm install
+```
+
+### ▶️ Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🌐 Open in browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+📁 app/
+ └── page.tsx        → 🧠 Core timer logic + UI layout
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+📁 components/
+ └── UI components   → 🎛 Timer ring, controls, settings, effects
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📁 data/
+ ├── quotes.ts       → 💬 Motivational quotes
+ └── gifs.ts         → 🎥 Background assets
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🛠️ Easily personalize your experience:
+
+* ⏱ Update durations in **settings modal**
+* 🎥 Add custom backgrounds → `data/gifs.ts`
+* 💬 Add/edit quotes → `data/quotes.ts`
+
+---
+
+## 📜 Scripts
+
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | 🚧 Start dev server      |
+| `npm run build` | 🏗️ Build for production |
+| `npm run start` | 🚀 Run production build  |
+| `npm run lint`  | 🧹 Lint code             |
+
+---
+
+## 🌟 Why This Project?
+
+This isn’t just a timer — it’s a **focus environment**:
+
+* 🎧 Reduces distractions
+* 🎯 Improves deep work sessions
+* 🌌 Creates a calming workspace vibe
+
+---
