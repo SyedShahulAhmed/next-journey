@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+	--bg-deep: #0f0f0f;
+	--bg-panel: #121212;
+	--text-main: #e5e5e5;
+	--text-muted: #949494;
+	--gold-main: #c6a85b;
+	--frost: #6ec1e4;
+}
+
+html,
+body {
+	background: var(--bg-deep);
+	color: var(--text-main);
+}
+
+body {
+	font-family: var(--font-inter), "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-cinzel), Georgia, serif;
+}
+
+
