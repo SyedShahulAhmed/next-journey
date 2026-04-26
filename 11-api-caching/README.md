@@ -1,36 +1,191 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🦖 DinoCache Dashboard
+A **futuristic SaaS dashboard** inspired by the iconic **Chrome Dino Game**, reimagined as a **real-time API caching developer tool**.
 
-First, run the development server:
+This project transforms backend caching into a **playable system** — where every API event becomes part of a dynamic runner experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Built with **Next.js (App Router)** ⚡, **React 19** ⚛️, **TypeScript** 🟦, **Tailwind CSS** 🎨, and **Framer Motion** 🎬
+
+---
+
+## 🎮 UI Inspiration
+
+🦖 **Chrome Dino Game**
+
+This dashboard reinterprets the classic endless runner into a developer tool:
+
+* 🏜️ Infinite desert with side-scrolling motion
+* 🦖 Dino reacts to API events in real-time
+* 🌵 Obstacles represent cache behavior
+* ⚡ Game mechanics mapped to system performance
+
+The goal: turn debugging APIs into a **visual, interactive experience**.
+
+---
+
+## ✨ Key Features
+
+### 🏃‍♂️ Live Runner Experience
+
+* 🏜️ Infinite scrolling desert + moving ground lines
+* 🌌 Parallax layers + CRT scanline effect
+* 🎨 Pixel-art + glassmorphism hybrid UI
+* 📈 Real-time score based on processed requests
+
+---
+
+### 🎯 Cache Gameplay Mapping
+
+* 💎 **Cache Hit** → Dino glow + gem event
+* 🌵 **Cache Miss** → Dino jump + cactus obstacle
+* 🐦 **Stale Cache** → Bird event
+* 💀 **API Error** → Skull + glitch + game over
+
+---
+
+### 📊 SaaS Dashboard Modules
+
+📦 **Cache Status Panel**
+
+* Animated states: HIT / MISS / STALE
+
+📉 **Metrics Cards**
+
+* 📊 Total Requests
+* ⚡ Cache Hit Rate
+* ⏱ Average Response Time
+* 🧠 Active Cache Keys
+
+🧾 **Request Timeline**
+
+* Horizontal event stream (real-time movement)
+
+📜 **Live Logs**
+
+* Terminal-style typing stream
+
+🗂️ **Cache Table**
+
+* TTL countdown bars
+* Delete actions per key
+
+---
+
+### 🎮 Interactions
+
+* 🔄 Auto-run mode for continuous simulation
+* 🐢 Hover focus mode (slowdown effect)
+* 💥 Delete key → obstacle destroy feedback
+* 🔁 Restart button after game over
+
+---
+
+## 🏗️ Project Structure
+
+```text id="dino-structure"
+src/
+ ├── app/
+ │    ├── api/
+ │    │    ├── cache/route.ts
+ │    │    └── data/route.ts
+ │    ├── globals.css        → 🎨 Theme + effects
+ │    ├── layout.tsx         → 🧩 Layout
+ │    └── page.tsx           → 🧠 Main dashboard logic
+ │
+ ├── components/
+ │    └── dino-dashboard/
+ │         ├── CacheStatusPanel.tsx
+ │         ├── CacheTable.tsx
+ │         ├── ControlsPanel.tsx
+ │         ├── DesertBackground.tsx
+ │         ├── DinoEngine.tsx
+ │         ├── GameOverOverlay.tsx
+ │         ├── LiveLogs.tsx
+ │         ├── MetricsGrid.tsx
+ │         ├── RequestTimeline.tsx
+ │         └── types.ts
+ │
+ └── lib/
+      └── cache.ts           → ⚙️ In-memory caching logic
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔌 API Endpoints
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📥 GET `/api/data`
 
-## Learn More
+Fetches data with caching behavior.
 
-To learn more about Next.js, take a look at the following resources:
+**Query Params:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* `userId` → `all` or numeric
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Behavior:**
 
-## Deploy on Vercel
+* ⚡ No cache → fetch fresh API data
+* 💎 Valid cache → return cached data
+* 🐦 Near expiry → return stale + background refresh
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 📦 GET `/api/cache`
+
+Returns all cache entries:
+
+* key
+* cachedAt
+* expiry
+* expiresIn
+
+---
+
+### ❌ DELETE `/api/cache?key=<cache-key>`
+
+Deletes a specific cache entry.
+
+---
+
+## 🚀 Local Development
+
+### 📦 Install dependencies
+
+```bash id="d1k9x3"
+npm install
+```
+
+### ▶️ Run dev server
+
+```bash id="z8m4q7"
+npm run dev
+```
+
+### 🌐 Open app
+
+```id="p5r2c1"
+http://localhost:3000
+```
+
+---
+
+## 📜 Scripts
+
+```bash id="scripts-dino"
+npm run dev     # 🚧 dev server
+npm run lint    # 🧹 lint
+npm run build   # 🏗️ build
+npm run start   # 🚀 production
+```
+
+---
+
+## 🧪 Demo Tips
+
+* 🔢 Use `userId`: `all`, `1`, `2`, `3` → create unique cache keys
+* 💀 Use `fail` → simulate API failure → trigger game over
+* 🔄 Enable Auto-run → stress-test system + speed scaling
+
+
+
+
+
