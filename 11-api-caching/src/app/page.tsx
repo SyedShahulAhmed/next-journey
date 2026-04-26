@@ -302,7 +302,7 @@ export default function Home() {
 
   return (
     <main
-      className={`${pixelFont.variable} ${monoFont.variable} min-h-screen bg-[radial-gradient(circle_at_top,_#1b1b1b,_#030303_58%)] px-3 py-5 text-zinc-100 md:px-6 md:py-8`}
+      className={`${pixelFont.variable} ${monoFont.variable} min-h-screen bg-[radial-gradient(circle_at_top,#1b1b1b,#030303_58%)] px-3 py-5 text-zinc-100 md:px-6 md:py-8`}
     >
       <div className="mx-auto max-w-7xl">
         <div className={`dino-dashboard-shell ${status === "ERROR" ? "error-glitch" : ""}`}>
