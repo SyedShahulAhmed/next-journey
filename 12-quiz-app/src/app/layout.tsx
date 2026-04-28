@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { Exo_2, Orbitron } from "next/font/google";
+import "./styles/globals.css";
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-orbitron",
+});
+
+const exo = Exo_2({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-exo",
+});
 
 export const metadata: Metadata = {
   title: "Next.js Quiz App",
@@ -12,8 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html
+      lang="en"
+      className={`${orbitron.variable} ${exo.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-black text-white">
+        {children}
+      </body>
     </html>
   );
 }
