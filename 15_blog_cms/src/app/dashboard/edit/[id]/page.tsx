@@ -1,56 +1,158 @@
-"use client"
+"use client";
 
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import HoloAlert from "@/components/HoloAlert";
+import HoloToast from "@/components/HoloToast";
+import { motion } from "framer-motion";
+import { Loader2, Save } from "lucide-react";
 
 export default function EditBlog() {
   const params = useParams();
   const router = useRouter();
+  const id = params?.id as string;
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [toastOpen, setToastOpen] = useState(false);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("blogs") || "[]");
-    const blog = stored.find((b: any) => b.id === params.id);
-    if (blog) {
-      setTitle(blog.title);
-      setContent(blog.content);
+    if (!id) {
+      return;
     }
-  }, [params.id]);
-  const handleUpdate = (e: React.FormEvent) => {
+
+    const fetchBlog = async () => {
+      setError(null);
+      try {
+        const res = await fetch(`/api/blogs/${id}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch");
+        }
+        const data = await res.json();
+        setTitle(data?.title ?? "");
+        setContent(data?.content ?? "");
+      } catch (fetchError) {
+        setError("Unable to load this log.");
+      }
+    };
+
+    fetchBlog();
+  }, [id]);
+
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    if (!title || !content) {
+      setError("All fields are required to update this log.");
+      return;
+    }
+    if (!id) {
+      setError("Missing log identifier.");
+      return;
+    }
+    setIsSubmitting(true);
 
-    const stored = JSON.parse(localStorage.getItem("blogs") || "[]");
-    const updated = stored.map((b: any) =>
-      b.id === params.id ? { ...b, title, content } : b,
-    );
+    try {
+      const res = await fetch(`/api/blogs/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title, content }),
+      });
 
-    localStorage.setItem("blogs", JSON.stringify(updated));
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || "Update failed");
+      }
 
-    router.push(`/post/${params.id}`);
+      setToastOpen(true);
+      setTimeout(() => {
+        setIsSubmitting(false);
+        router.push(`/post/${id}`);
+      }, 650);
+    } catch (updateError) {
+      setError("Update failed. Stabilize uplink and retry.");
+      setIsSubmitting(false);
+    }
   };
+
+  useEffect(() => {
+    if (!toastOpen) {
+      return;
+    }
+    const timer = setTimeout(() => setToastOpen(false), 2200);
+    return () => clearTimeout(timer);
+  }, [toastOpen]);
+
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">✏️ Edit Blog</h1>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="mx-auto max-w-2xl"
+    >
+      <HoloToast open={toastOpen} message="Log updated." />
 
-      <form onSubmit={handleUpdate} className="space-y-4">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 bg-black border border-gray-700 rounded"
-        />
+      <div className="glass-panel holo-sheen rounded-3xl border border-cyan-500/30 px-6 py-8">
+        <div className="font-display text-sm text-cyan-100">Edit Log</div>
+        <h1 className="mt-3 text-3xl font-semibold text-cyan-50">Refine Archive Record</h1>
+        <p className="mt-2 text-sm text-slate-200/70">
+          Adjust the signal, align the message, and store a new revision to the archive.
+        </p>
 
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full p-3 bg-black border border-gray-700 rounded h-40"
-        />
+        {error ? (
+          <div className="mt-5">
+            <HoloAlert tone="error" title="Update Error" description={error} />
+          </div>
+        ) : null}
 
-        <button type="submit" className="bg-white text-black px-5 py-2 rounded">
-          Update
-        </button>
-      </form>
-    </div>
+        <form onSubmit={handleUpdate} className="mt-6 space-y-5">
+          <div className="group space-y-2">
+            <label className="text-xs uppercase tracking-[0.35em] text-cyan-200/70 transition group-focus-within:text-cyan-100">
+              Title
+            </label>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="holo-input"
+            />
+          </div>
+
+          <div className="group space-y-2">
+            <label className="text-xs uppercase tracking-[0.35em] text-cyan-200/70 transition group-focus-within:text-cyan-100">
+              Content
+            </label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="holo-input min-h-[180px]"
+            />
+          </div>
+
+          <motion.button
+            type="submit"
+            disabled={isSubmitting}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="holo-button holo-button-primary holo-sheen w-full justify-center"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Transmitting...
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4" />
+                Update Log
+              </>
+            )}
+          </motion.button>
+        </form>
+      </div>
+    </motion.div>
   );
 }

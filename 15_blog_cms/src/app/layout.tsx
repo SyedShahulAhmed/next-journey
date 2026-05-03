@@ -1,10 +1,24 @@
 import type { Metadata } from "next";
+import { Orbitron, Space_Grotesk } from "next/font/google";
+import AppShell from "@/components/AppShell";
 import "../styles/globals.css";
 
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Next.js Blog CMS",
+  title: "Jedi CMS",
   description:
-    "A simple and efficient blog content management system built with Next.js, allowing users to create, edit, and manage their blog posts with ease.",
+    "A premium, holographic Blog CMS interface with cinematic motion and immersive controls.",
 };
 
 export default function RootLayout({
@@ -14,12 +28,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white">
-        <div className="p-4 border-b border-gray-800">
-          <h1 className="text-xl font-bold">⚡ Blog CMS</h1>
-        </div>
-
-        <main className="p-6">{children}</main>
+      <body
+        className={`${orbitron.variable} ${spaceGrotesk.variable} antialiased`}
+      >
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
