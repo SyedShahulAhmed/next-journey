@@ -41,7 +41,7 @@ export default function Home() {
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="glass-panel holo-sheen relative overflow-hidden rounded-3xl border border-cyan-500/30 px-6 py-8"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-transparent to-transparent" />
         <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <motion.div
             initial={{ opacity: 0, y: 12 }}

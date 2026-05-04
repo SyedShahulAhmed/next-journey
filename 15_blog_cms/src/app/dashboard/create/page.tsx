@@ -42,8 +42,9 @@ export default function CreateBlog() {
       setTitle("");
       setContent("");
       setToastOpen(true);
-    } catch (submitError) {
+    } catch (error) {
       setError("Transmission failed. Stabilize uplink and retry.");
+      console.error("Error submitting log:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +103,7 @@ export default function CreateBlog() {
               placeholder="Write your transmission..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="holo-input min-h-[180px]"
+              className="holo-input min-h-45"
             />
           </div>
 
