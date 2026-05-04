@@ -523,7 +523,7 @@ export default function Home() {
 function HackerBackdrop() {
   return (
     <>
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-[#050b12] to-[#020408]" />
+      <div className="absolute inset-0 bg-linear-to-br from-black via-[#050b12] to-[#020408]" />
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute inset-0 noise" />
       <div className="absolute inset-0 scanlines" />
