@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
 
-  const isAuthPage = req.nextUrl.pathname.startsWith("/login");
-  req.nextUrl.pathname.startsWith("/signup");
+  const isAuthPage =
+    req.nextUrl.pathname.startsWith("/login") ||
+    req.nextUrl.pathname.startsWith("/signup");
   const isProtected = req.nextUrl.pathname.startsWith("/dashboard");
 
   if (isProtected && !token) {
@@ -19,5 +20,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path", "/login", "signup"],
+  matcher: ["/dashboard/:path*", "/login", "/signup"],
 };
