@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@layer base {
+	:root {
+		color-scheme: dark;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply bg-void text-pearl font-body antialiased;
+		min-height: 100%;
+		background-image: radial-gradient(
+			circle at 20% 0%,
+			rgba(255, 255, 255, 0.06),
+			transparent 45%
+		),
+			radial-gradient(
+			circle at 80% 10%,
+			rgba(255, 255, 255, 0.04),
+			transparent 50%
+		);
+	}
+
+	::selection {
+		background: rgba(255, 255, 255, 0.12);
+		color: #f2f2f3;
+	}
+
+	* {
+		scrollbar-color: rgba(191, 192, 194, 0.28) rgba(24, 24, 26, 0.7);
+		scrollbar-width: thin;
+	}
+
+	*::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	*::-webkit-scrollbar-track {
+		background: rgba(24, 24, 26, 0.7);
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: rgba(191, 192, 194, 0.28);
+		border-radius: 999px;
+		border: 2px solid rgba(24, 24, 26, 0.8);
+	}
+
+	*::-webkit-scrollbar-thumb:hover {
+		background: rgba(236, 236, 238, 0.4);
+	}
+}
+
+@layer utilities {
+	.glass-panel {
+		@apply border border-white/10 bg-white/5 backdrop-blur-md;
+	}
+
+	.holo-grid {
+		background-image: linear-gradient(
+				rgba(255, 255, 255, 0.04) 1px,
+				transparent 1px
+			),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+		background-size: 48px 48px;
+		mask-image: radial-gradient(circle at center, black 40%, transparent 75%);
+	}
+
+	.nebula-gradient {
+		background: radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 55%),
+			radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.04), transparent 60%),
+			radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.03), transparent 60%);
+	}
+}
+
+
