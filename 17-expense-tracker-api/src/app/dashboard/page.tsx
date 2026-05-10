@@ -1,11 +1,39 @@
 "use client";
 
+import ExpensePieChart from "@/components/charts/ExpensePieChart";
+import MonthlyBarChart from "@/components/charts/MonthlyBarChart";
 import Sidebar from "@/components/dashboard/SideBar";
 import StatsCard from "@/components/dashboard/StatsCard";
 import TransactionTable from "@/components/dashboard/TransactionTable";
 import AddTransactionForm from "@/components/forms/AddTransactionForm";
+import { NebulaBackdrop, Scanline, Starfield } from "@/components/orv/Backdrop";
+import OracleAdvisor from "@/components/orv/OracleAdvisor";
 import useTransactions from "@/hooks/userTransactions";
-import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
+import { LogOut, Radar, Sparkles, Wallet } from "lucide-react";
+
+const oracleNotes = [
+  {
+    id: "oracle-1",
+    title: "Secretive Plotter",
+    message:
+      "High expenditure on consumables detected. Consolidate to improve probability reserve.",
+    tone: "warning" as const,
+  },
+  {
+    id: "oracle-2",
+    title: "Dokkaebi Broadcast",
+    message:
+      "A constellation is observing your financial scenario. Maintain steady sponsorship flow.",
+    tone: "info" as const,
+  },
+  {
+    id: "oracle-3",
+    title: "Nebula Core",
+    message: "Scenario costs stabilized. Probability synchronization complete.",
+    tone: "success" as const,
+  },
+];
 
 export default function DashboardPage() {
   const { transactions, loading, refetch } = useTransactions();
@@ -21,52 +49,97 @@ export default function DashboardPage() {
   const balance = totalIncome - totalExpense;
 
   return (
-    <main className="min-h-screen bg-black text-white flex">
-      <Sidebar />
+    <main className="relative min-h-screen overflow-hidden bg-void text-white">
+      <NebulaBackdrop />
+      <Starfield />
+      <Scanline />
 
-      <section className="flex-1 p-8">
-        <h1 className="text-4xl font-bold mb-8">Expense Dashboard</h1>
-        <button
-          onClick={async () => {
-            await fetch("/api/auth/logout", {
-              method: "POST",
-            });
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-10"
+      >
+        <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
+          <Sidebar />
 
-            window.location.href = "/login";
-          }}
-          className="bg-red-500 hover:bg-red-400 transition px-5 py-3 rounded-xl font-semibold"
-        >
-          Logout
-        </button>
-        {/* Stats */}
-        <div className="grid md:grid-cols-3 gap-6 mb-10">
-          <StatsCard
-            title="Balance"
-            amount={`$${balance}`}
-            icon={<DollarSign />}
-          />
+          <section className="space-y-8">
+            <header className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">
+                    Star Stream: Scenario Finance Manager
+                  </p>
+                  <h1 className="mt-2 text-3xl font-semibold text-white md:text-4xl">
+                    Scenario Command Console
+                  </h1>
+                  <p className="mt-2 text-sm text-white/60">
+                    A constellation is observing your financial scenario.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-white/55">
+                    <Sparkles className="h-4 w-4" />
+                    System Boot-up
+                  </div>
+                  <button
+                    onClick={async () => {
+                      await fetch("/api/auth/logout", {
+                        method: "POST",
+                      });
 
-          <StatsCard
-            title="Income"
-            amount={`$${totalIncome}`}
-            icon={<TrendingUp />}
-          />
+                      window.location.href = "/login";
+                    }}
+                    className="flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-white/70 transition hover:border-white/30"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Exit Scenario
+                  </button>
+                </div>
+              </div>
+            </header>
 
-          <StatsCard
-            title="Expenses"
-            amount={`$${totalExpense}`}
-            icon={<TrendingDown />}
-          />
+            <div className="grid gap-6 lg:grid-cols-3">
+              <StatsCard
+                title="Probability Reserve"
+                value={balance}
+                subtext="Primary stability index"
+                pulse
+                icon={<Wallet className="h-6 w-6" />}
+              />
+              <StatsCard
+                title="Sponsored Coins"
+                value={totalIncome}
+                subtext="Constellation sponsorship flow"
+                icon={<Sparkles className="h-6 w-6" />}
+              />
+              <StatsCard
+                title="Scenario Costs"
+                value={totalExpense}
+                subtext="Active broadcast expenditure"
+                icon={<Radar className="h-6 w-6" />}
+              />
+            </div>
+
+            <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+              <div className="space-y-6">
+                <ExpensePieChart transactions={transactions} />
+                <MonthlyBarChart transactions={transactions} />
+              </div>
+              <OracleAdvisor notes={oracleNotes} />
+            </div>
+
+            <div className="grid gap-6 xl:grid-cols-2">
+              <AddTransactionForm onSuccess={refetch} />
+              <TransactionTable
+                transactions={transactions}
+                loading={loading}
+                refetch={refetch}
+              />
+            </div>
+          </section>
         </div>
-
-        {/* Form */}
-        <div className="mb-10">
-          <AddTransactionForm onSuccess={refetch} />
-        </div>
-
-        {/* Transactions */}
-        <TransactionTable transactions={transactions} loading={loading} />
-      </section>
+      </motion.div>
     </main>
   );
 }
