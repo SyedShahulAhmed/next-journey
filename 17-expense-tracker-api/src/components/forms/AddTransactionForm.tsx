@@ -59,25 +59,25 @@ export default function AddTransactionForm({ onSuccess }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-md"
+      className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-sm"
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
             Record Scenario
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-white">
             Initialize Scenario Log
           </h2>
         </div>
-        <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/60">
+        <div className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/60">
           Broadcast
         </div>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
             Amount
           </span>
           <input
@@ -93,8 +93,8 @@ export default function AddTransactionForm({ onSuccess }: Props) {
           />
         </label>
 
-        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
             Scenario Type
           </span>
           <select
@@ -107,17 +107,17 @@ export default function AddTransactionForm({ onSuccess }: Props) {
             }
             className="mt-4 w-full bg-transparent text-base text-white outline-none"
           >
-            <option value="income" className="bg-slate-950">
+            <option value="income" className="bg-abyss">
               Sponsored Coins
             </option>
-            <option value="expense" className="bg-slate-950">
+            <option value="expense" className="bg-abyss">
               Scenario Costs
             </option>
           </select>
         </label>
 
-        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
             Category
           </span>
           <input
@@ -133,8 +133,8 @@ export default function AddTransactionForm({ onSuccess }: Props) {
           />
         </label>
 
-        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+        <label className="relative rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+          <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
             Description
           </span>
           <input
@@ -154,13 +154,13 @@ export default function AddTransactionForm({ onSuccess }: Props) {
       <div className="mt-6 flex flex-wrap gap-3">
         <button
           disabled={loading}
-          className="relative overflow-hidden rounded-full border border-white/20 bg-white/10 px-6 py-3 text-xs uppercase tracking-[0.4em] text-white/80 shadow-cosmic transition hover:border-white/40 hover:bg-white/15 disabled:opacity-60"
+          className="relative overflow-hidden rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm tracking-[0.14em] text-white/85 shadow-cosmic transition hover:border-white/35 hover:bg-white/15 disabled:opacity-60"
         >
           {loading ? "Broadcasting..." : "Record Scenario"}
         </button>
         <button
           type="reset"
-          className="rounded-full border border-white/20 px-6 py-3 text-xs uppercase tracking-[0.4em] text-white/60 transition hover:border-white/40 hover:text-white"
+          className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.14em] text-white/60 transition hover:border-white/35 hover:text-white"
         >
           Clear
         </button>

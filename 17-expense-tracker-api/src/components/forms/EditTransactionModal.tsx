@@ -66,26 +66,26 @@ export default function EditTransactionModal({
         initial={{ scale: 0.92, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full max-w-lg rounded-3xl border border-white/10 bg-white/5 p-8 text-white shadow-aura-strong backdrop-blur-md"
+        className="w-full max-w-lg rounded-3xl border border-white/10 bg-white/5 p-8 text-white shadow-cosmic backdrop-blur-sm"
       >
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+            <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
               Dimensional Update
             </p>
             <h2 className="mt-2 text-2xl font-semibold">Edit Scenario</h2>
           </div>
           <button
             onClick={onClose}
-            className="rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/70"
+            className="rounded-full border border-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/70"
           >
             Close
           </button>
         </div>
 
         <form onSubmit={handleUpdate} className="mt-6 space-y-4">
-          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
               Amount
             </span>
             <input
@@ -101,8 +101,8 @@ export default function EditTransactionModal({
             />
           </label>
 
-          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
               Scenario Type
             </span>
             <select
@@ -115,17 +115,17 @@ export default function EditTransactionModal({
               }
               className="mt-4 w-full bg-transparent text-base text-white outline-none"
             >
-              <option value="income" className="bg-slate-950">
+              <option value="income" className="bg-abyss">
                 Sponsored Coins
               </option>
-              <option value="expense" className="bg-slate-950">
+              <option value="expense" className="bg-abyss">
                 Scenario Costs
               </option>
             </select>
           </label>
 
-          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
               Category
             </span>
             <input
@@ -141,8 +141,8 @@ export default function EditTransactionModal({
             />
           </label>
 
-          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/30">
-            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.3em] text-white/55">
+          <label className="relative block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 transition focus-within:border-white/25">
+            <span className="absolute left-4 top-2 text-[10px] uppercase tracking-[0.18em] text-white/55">
               Description
             </span>
             <input
@@ -160,7 +160,7 @@ export default function EditTransactionModal({
 
           <button
             disabled={loading}
-            className="w-full rounded-full border border-white/20 bg-white/10 py-3 text-xs uppercase tracking-[0.4em] text-white/80 shadow-cosmic transition hover:border-white/40 hover:bg-white/15 disabled:opacity-60"
+            className="w-full rounded-full border border-white/20 bg-white/10 py-3 text-sm tracking-[0.14em] text-white/85 shadow-cosmic transition hover:border-white/35 hover:bg-white/15 disabled:opacity-60"
           >
             {loading ? "Synchronizing..." : "Update Scenario"}
           </button>

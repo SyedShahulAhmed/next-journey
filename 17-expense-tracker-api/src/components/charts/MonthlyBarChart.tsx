@@ -34,7 +34,7 @@ export default function MonthlyBarChart({ transactions }: Props) {
     }
 
     return (
-      <div className="rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm shadow-cosmic backdrop-blur-md">
+      <div className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-sm shadow-cosmic backdrop-blur-sm">
         <p className="text-white/60">{label}</p>
         {payload.map((entry: any) => (
           <p key={entry.name} className="text-white/90">
@@ -45,17 +45,17 @@ export default function MonthlyBarChart({ transactions }: Props) {
     );
   }
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-md">
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-sm">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
             Constellation Analysis
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-white">
             Sponsored Coins vs Scenario Costs
           </h2>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/60">
+        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/60">
           Cycle view
         </div>
       </div>
@@ -72,41 +72,31 @@ export default function MonthlyBarChart({ transactions }: Props) {
             minWidth={0}
             minHeight={300}
           >
-            <BarChart data={monthlyData} barGap={8} barSize={18}>
-              <defs>
-                <linearGradient id="incomeGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#d9d9dc" stopOpacity={0.9} />
-                  <stop offset="100%" stopColor="#a0a1a5" stopOpacity={0.2} />
-                </linearGradient>
-                <linearGradient id="expenseGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#b9babd" stopOpacity={0.9} />
-                  <stop offset="100%" stopColor="#8c8d91" stopOpacity={0.2} />
-                </linearGradient>
-              </defs>
+            <BarChart data={monthlyData} barGap={8} barSize={16}>
               <XAxis
                 dataKey="name"
                 tickLine={false}
                 axisLine={false}
-                stroke="#b7b8bc"
-                tick={{ fill: "#d4d5d9", fontSize: 11 }}
+                stroke="#b2b4b9"
+                tick={{ fill: "#d7d8dc", fontSize: 11 }}
               />
               <YAxis
                 tickLine={false}
                 axisLine={false}
-                stroke="#b7b8bc"
-                tick={{ fill: "#d4d5d9", fontSize: 11 }}
+                stroke="#b2b4b9"
+                tick={{ fill: "#d7d8dc", fontSize: 11 }}
               />
               <Tooltip content={<HoloTooltip />} />
               <Bar
                 dataKey="income"
                 name="Sponsored Coins"
-                fill="url(#incomeGlow)"
+                fill="#cfd0d4"
                 radius={[8, 8, 0, 0]}
               />
               <Bar
                 dataKey="expense"
                 name="Scenario Costs"
-                fill="url(#expenseGlow)"
+                fill="#9da0a6"
                 radius={[8, 8, 0, 0]}
               />
             </BarChart>

@@ -7,7 +7,7 @@ interface Props {
   transactions: Transaction[];
 }
 
-const COLORS = ["#d6d6d8", "#bdbdc1", "#a3a4a8", "#8b8c90", "#76777b"];
+const COLORS = ["#d8d9dd", "#c6c7cb", "#b0b1b6", "#97989d", "#808186"];
 
 function formatCurrency(value: number) {
   return value.toLocaleString("en-US", {
@@ -23,7 +23,7 @@ function HoloTooltip({ active, payload }: any) {
   }
 
   return (
-    <div className="rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm shadow-cosmic backdrop-blur-md">
+    <div className="rounded-xl border border-white/15 bg-white/8 px-4 py-3 text-sm shadow-cosmic backdrop-blur-sm">
       {payload.map((entry: any) => (
         <p key={entry.name} className="text-white/90">
           {entry.name}: {formatCurrency(entry.value)}
@@ -52,17 +52,17 @@ export default function ExpensePieChart({ transactions }: Props) {
   }));
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-md">
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-cosmic backdrop-blur-sm">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-white/60">
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/60">
             Constellation Analysis
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-white">
             Scenario Cost Constellation
           </h2>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/60">
+        <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-white/60">
           Live
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function ExpensePieChart({ transactions }: Props) {
                 outerRadius={110}
                 innerRadius={60}
                 paddingAngle={4}
-                stroke="#2a2b2f"
+                stroke="#2f3034"
                 strokeWidth={2}
               >
                 {data.map((_, index) => (
