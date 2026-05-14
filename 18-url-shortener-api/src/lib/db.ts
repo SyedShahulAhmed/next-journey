@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
-  throw new Error("Please define MONGO_URL");
+  throw new Error("Please define MONGO_URI");
 }
 
 let cached = (
@@ -23,14 +23,17 @@ if (!cached) {
 }
 
 export async function connectDb() {
-  if (cached?.conn) {
-    return;
+  if (cached.conn) {
+    return cached.conn;
   }
-  if (!cached?.promise) {
-    cached?.promise = mongoose.connect(MONGO_URI).then((mongoose) => {
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGO_URI).then((mongoose) => {
       return mongoose;
     });
   }
-  cached?.conn = await cached?.promise;
-  return cached?.conn;
+
+  cached.conn = await cached.promise;
+
+  return cached.conn;
 }
