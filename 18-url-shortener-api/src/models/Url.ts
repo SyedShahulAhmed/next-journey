@@ -1,4 +1,4 @@
-import mongoose, { model, models, Schema } from "mongoose";
+import { model, models, Schema } from "mongoose";
 
 const urlSchema = new Schema(
   {
@@ -15,17 +15,20 @@ const urlSchema = new Schema(
     shortCode: {
       type: String,
       required: true,
+      unique: true,
     },
     clicks: {
       type: Number,
+      default: 0,
     },
     lastVisited: {
-      type: String,
+      type: Date,
+      default: null,
     },
   },
   { timestamps: true },
 );
 
-const Url = models.Url || model("Url",urlSchema)
+const Url = models.Url || model("Url", urlSchema);
 
-export default Url
+export default Url;
