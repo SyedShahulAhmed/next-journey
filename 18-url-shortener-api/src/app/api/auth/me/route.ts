@@ -12,27 +12,27 @@ export async function GET(req: NextRequest) {
     if (!token) {
       return NextResponse.json(
         { error: "Unauthorized access" },
-        { status: 400 },
+        { status: 401 },
       );
     }
 
     const decoded: any = verifyToken(token);
 
     if (!decoded) {
-      return NextResponse.json({ error: "Invalid Token" }, { status: 400 });
+      return NextResponse.json({ error: "Invalid Token" }, { status: 401 });
     }
 
     const user = await User.findById(decoded.userId).select("-password");
 
     if (!user) {
-      return NextResponse.json({ error: "Invalid User" });
+      return NextResponse.json({ error: "Invalid User" }, { status: 404 });
     }
 
     return NextResponse.json({ user });
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong during user fetching" },
-      { status: 401 },
+      { status: 500 },
     );
   }
 }

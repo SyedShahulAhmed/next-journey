@@ -8,38 +8,48 @@ export async function POST(req: Request) {
     await connectDb();
 
     const { name, email, password } = await req.json();
+    const normalizedName = String(name || "").trim();
+    const normalizedEmail = String(email || "").trim().toLowerCase();
+    const normalizedPassword = String(password || "");
 
-    if (!name && !email && !password) {
+    if (!normalizedName || !normalizedEmail || !normalizedPassword) {
       return NextResponse.json(
-        { error: "Some field are missing" },
+        { error: "Some fields are missing" },
         { status: 400 },
       );
     }
-    const userExist = await User.findOne({ email });
+    const userExist = await User.findOne({ email: normalizedEmail });
 
     if (userExist) {
       return NextResponse.json(
         { error: "User already exists" },
-        { status: 400 },
+        { status: 409 },
       );
     }
 
     const hashpass = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
-      name,
-      email,
+      name: normalizedName,
+      email: normalizedEmail,
       password: hashpass,
     });
 
     return NextResponse.json(
-      { message: "User succesfully created", newUser },
-      { status: 200 },
+      {
+        message: "User successfully created",
+        user: {
+          id: newUser._id,
+          name: newUser.name,
+          email: newUser.email,
+        },
+      },
+      { status: 201 },
     );
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong during signup" },
-      { status: 401 },
+      { status: 500 },
     );
   }
 }

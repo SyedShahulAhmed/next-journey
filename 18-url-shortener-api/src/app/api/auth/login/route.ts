@@ -9,15 +9,19 @@ export async function POST(req: Request) {
     await connectDb();
 
     const { email, password } = await req.json();
+    const normalizedEmail = String(email || "")
+      .trim()
+      .toLowerCase();
+    const normalizedPassword = String(password || "");
 
-    if (!email && !password) {
+    if (!normalizedEmail || !normalizedPassword) {
       return NextResponse.json(
         { error: "Some fields are missing" },
         { status: 400 },
       );
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: normalizedEmail });
 
     if (!user) {
       return NextResponse.json(
@@ -42,7 +46,7 @@ export async function POST(req: Request) {
 
     const res = NextResponse.json(
       {
-        message: "login sucessfull",
+        message: "Login successful",
         user: {
           id: user._id,
           name: user.name,
@@ -52,17 +56,20 @@ export async function POST(req: Request) {
       },
       { status: 200 },
     );
-    res.cookies.set("token", token, {
+    res.cookies.set({
+      name: "token",
+      value: token,
       httpOnly: true,
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7,
+      secure: false,
+      sameSite: "lax",
       path: "/",
+      maxAge: 60 * 60 * 24 * 7,
     });
     return res;
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong during login" },
-      { status: 401 },
+      { status: 500 },
     );
   }
 }
