@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+
+import "../styles/globals.css";
+
+export const metadata: Metadata = {
+  title: "Real-Time Chat",
+  description: "A simple real-time chat application built with Next.js",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col">{children}</body>
+    </html>
+  );
+}
