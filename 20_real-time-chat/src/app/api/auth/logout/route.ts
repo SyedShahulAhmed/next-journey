@@ -7,6 +7,8 @@ export async function POST(req: Request) {
   );
   res.cookies.set("token", "", {
     maxAge: 0,
+    path: "/",
+    secure: process.env.NODE_ENV === "production",
   });
   return res;
 }

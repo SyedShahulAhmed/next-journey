@@ -1,13 +1,13 @@
-import { getUser } from "@/lib/auth";
+import { getAuthUser } from "@/lib/auth";
 import { connectDb } from "@/lib/db";
 import User from "@/models/User";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   try {
     await connectDb();
 
-    const currUser = await getUser();
+    const currUser = await getAuthUser();
 
     if (!currUser) {
       return NextResponse.json(
@@ -16,7 +16,7 @@ export async function GET(req: Request) {
       );
     }
 
-    const user = await User.findById(currUser.userId).select("-passowrd");
+    const user = await User.findById(currUser.userId).select("-password");
 
     if (!user) {
       return NextResponse.json(
@@ -25,10 +25,19 @@ export async function GET(req: Request) {
       );
     }
     return NextResponse.json(
-      { success: true, message: "User fetched Successfully", user },
+      {
+        success: true,
+        user: {
+          id: user._id.toString(),
+          username: user.username,
+          email: user.email,
+          avatar: user.avatar,
+          createdAt: user.createdAt,
+        },
+      },
       { status: 200 },
     );
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, error: "Something went wrong" },
       { status: 400 },
