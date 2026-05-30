@@ -6,18 +6,19 @@ const roomSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     description: {
       type: String,
+      default: "",
     },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
-    members: {
-      type: [],
-    },
+    // members: {
+    //   type: [],
+    // },
   },
   { timestamps: true },
 );

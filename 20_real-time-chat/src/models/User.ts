@@ -12,6 +12,7 @@ const userSchema = new Schema(
       required: true,
       trim: true,
       lowercase: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -19,7 +20,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default : "",
+      default: "",
     },
   },
   { timestamps: true },

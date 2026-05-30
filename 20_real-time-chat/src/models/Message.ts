@@ -3,19 +3,25 @@ import { model, models, Schema } from "mongoose";
 const messageSchema = new Schema(
   {
     sender: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     room: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Room",
       required: true,
     },
     content: {
       type: String,
+      required: true,
     },
-    type: {
-      type: [],
+    clientId: {
+      type: String,
     },
+    // type: {
+    //   type: [],
+    // },
   },
   { timestamps: true },
 );
