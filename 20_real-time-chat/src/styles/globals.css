@@ -1,33 +1,65 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f1117;
-  --foreground: #f3f4f6;
-
-  --card: #181c25;
-  --card-foreground: #f3f4f6;
-
-  --popover: #181c25;
-  --popover-foreground: #f3f4f6;
-
-  --primary: #5b8cff;
-  --primary-foreground: #ffffff;
-
-  --secondary: #222733;
-  --secondary-foreground: #f3f4f6;
-
-  --muted: #2a3140;
-  --muted-foreground: #9ca3af;
-
-  --border: #2a3140;
-  --input: #222733;
-  --ring: #5b8cff;
-
+  --background: #0b1220;
+  --surface: #111827;
+  --surface-secondary: #172033;
+  --surface-elevated: #1e293b;
+  --border: #2b3648;
+  --accent: #7dd3fc;
+  --accent-2: #60a5fa;
+  --success: #34d399;
+  --danger: #f87171;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --muted: #64748b;
+  --hover: #243244;
+  --glow: rgba(125, 211, 252, 0.12);
   --radius: 1rem;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(1200px 800px at 20% -10%, rgba(96, 165, 250, 0.08), transparent 55%),
+    radial-gradient(1000px 700px at 90% 10%, rgba(125, 211, 252, 0.12), transparent 60%),
+    var(--background);
+  color: var(--text-primary);
   min-height: 100vh;
+  font-family: var(--font-body, "Manrope"), system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display, "Sora"), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(125, 211, 252, 0.24);
+  color: var(--text-primary);
+}
+
+.glass-panel {
+  background: linear-gradient(150deg, rgba(17, 24, 39, 0.92), rgba(23, 32, 51, 0.88));
+  border: 1px solid rgba(43, 54, 72, 0.8);
+  box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.04), 0 20px 40px rgba(2, 6, 23, 0.6);
+}
+
+.soft-glow {
+  box-shadow: 0 0 24px var(--glow);
 }
